@@ -9,7 +9,8 @@ st.set_page_config(
     layout="wide"
 )
 sns.set_style("whitegrid")
-DATA_PATH ="/Users/vishwassrivastava/project1/ecommerce_-analysis/data.csv"
+from pathlib import Path
+DATA_PATH = Path(__file__).parent / "data.csv"
 @st.cache_data
 def load_data(path):
     df = pd.read_csv(path,encoding="latin1")
@@ -24,8 +25,8 @@ def load_data(path):
     ].copy()
 
     df_clean["InvoiceDate"] = pd.to_datetime(
-        df_clean["InvoiceDate"], format="%m/%d/%Y %H:%M"
-    )
+    df_clean["InvoiceDate"], format="%m/%d/%Y %H:%M"
+)
     df_clean["TotalPrice"] = np.multiply(df_clean["Quantity"], df_clean["UnitPrice"])
     df_clean["Year"] = df_clean["InvoiceDate"].dt.year
     df_clean["Month"] = df_clean["InvoiceDate"].dt.month
